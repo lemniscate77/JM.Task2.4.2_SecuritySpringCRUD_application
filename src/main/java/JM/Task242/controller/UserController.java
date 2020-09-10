@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+//    @Autowired
+//    public UserController(UserService userService) {
+//        this.userService = userService;
+//    }
 
     @GetMapping(value = "/")
     public String getHomePage() {
@@ -28,6 +28,8 @@ public class UserController {
     public String getLoginPage() {
         return "login";
     }
+
+
 
     @GetMapping(value = "/user")
     public String getUserPage(@AuthenticationPrincipal User user, Model model) {
