@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-
+// тестирую гит
 @Repository
 public class UserDAOImpl implements UserDAO {
     @PersistenceContext
@@ -44,4 +44,5 @@ public class UserDAOImpl implements UserDAO {
     public User getUserByName(String name) {
         return em.find(User.class,name);
     }
+
 }
