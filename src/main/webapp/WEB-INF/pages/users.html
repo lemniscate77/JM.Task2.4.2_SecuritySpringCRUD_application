@@ -22,30 +22,30 @@
 <h1>USERS TABLE</h1>
 
 
-<th:block th:each="msg : ${listUser}">
+<th:block th:each="user : ${userList}">
     <table>
-        <td><a th:href="@{/edit/{id}(id=${msg.getId()})}">Edit</a></td>
-        <td><a th:href="@{/remove/{id}(id=${msg.getId()})}">Remove</a></td>
+        <td><a th:href="@{/edit/{id}(id=${user.getId()})}">Edit</a></td>
+        <td><a th:href="@{/remove/{id}(id=${user.getId()})}">Remove</a></td>
         <tr>
             <h4></h4>
             <td>ID</td>
-            <th th:text="${msg.getId()}"></th>
+            <th th:text="${user.getId()}"></th>
         </tr>
         <tr>
             <td>Name</td>
-            <th th:text="${msg.getName()}">Name</th>
+            <th th:text="${user.getFirstName()}">Name</th>
         </tr>
         <tr>
             <td>LastName</td>
-            <th th:text="${msg.getLastName()}">LastName</th>
+            <th th:text="${user.getLastName()}">LastName</th>
         </tr>
         <tr>
             <td>login</td>
-            <th th:text="${msg.getLogin()}">Login</th>
+            <th th:text="${user.getEmail()}">Login</th>
         </tr>
         <tr>
             <td>Password</td>
-            <th th:text="${msg.getPassword()}">Password</th>
+            <th th:text="${user.getPassword()}">Password</th>
         </tr>
 
     </table>

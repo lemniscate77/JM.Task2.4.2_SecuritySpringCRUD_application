@@ -12,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller("AdminController")
-@RequestMapping("/admin/**")
+@Controller
+//@RequestMapping("/admin")
 public class AdminController {
 
     private UserService userService;
@@ -23,7 +23,8 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView allUsers() {
         List<User> users = userService.allUsers();
         ModelAndView modelAndView = new ModelAndView();
@@ -31,41 +32,44 @@ public class AdminController {
         modelAndView.addObject("userList", users);
         return modelAndView;
     }
+
+    @RequestMapping(value = "/user/add", method = RequestMethod.POST)
+    public ModelAndView addUser(@ModelAttribute("user") User user) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/admin");
+        if (user.getId() == 0) {
+            this.userService.add(user);
+        } else {
+            this.userService.edit(user);
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView deleteUser(@PathVariable("id") Long id) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/admin");
+        User user = userService.getById(id);
+        userService.delete(id);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public ModelAndView editPage(@PathVariable("id") int id) {
+    public ModelAndView editPage(@PathVariable("id") Long id) {
         User user = userService.getById(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("editPage");
         modelAndView.addObject("user", user);
         return modelAndView;
     }
+
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView editUser(@ModelAttribute("user") User user) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/");
+        modelAndView.setViewName("redirect:/admin");
         userService.edit(user);
         return modelAndView;
     }
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView addPage() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("editPage");
-        return modelAndView;
-    }
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView addUser(@ModelAttribute("user") User user) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/");
-        userService.add(user);
-        return modelAndView;
-    }
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public ModelAndView deleteUser(@PathVariable("id") int id) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/");
-        User user = userService.getById(id);
-        userService.delete(id);
-        return modelAndView;
-    }
+
 
 }
