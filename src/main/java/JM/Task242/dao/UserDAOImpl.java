@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-// тестирую гит
+// убрал коммент
 @Repository
 public class UserDAOImpl implements UserDAO {
     @PersistenceContext
