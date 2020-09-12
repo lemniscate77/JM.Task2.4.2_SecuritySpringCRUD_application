@@ -25,7 +25,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Integer id) {
         User user = em.find(User.class,id);
         em.remove(user);
     }
@@ -36,7 +36,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User getById(Long id) {
+    public User getById(Integer id) {
         return em.find(User.class,id);
     }
 

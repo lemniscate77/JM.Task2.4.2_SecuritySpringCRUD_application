@@ -3,15 +3,20 @@ package JM.Task242.service;
  /* версия 2.0 */
 
 import JM.Task242.dao.UserDAO;
+import JM.Task242.model.Role;
 import JM.Task242.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -36,7 +41,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Integer id) {
         userDao.delete(id);
     }
 
@@ -46,12 +51,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User getById(Long id) {
+    public User getById(Integer id) {
         return userDao.getById(id);
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return userDao.getUserByName(s);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userDao.getUserByName(username);
+
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+
+        for (Role role : user.getRoles()) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
+        }
+        return new org.springframework.security.core.userdetails.User
+                (user.getUsername(),
+                        user.getPassword(),
+                        grantedAuthorities);
     }
 }
