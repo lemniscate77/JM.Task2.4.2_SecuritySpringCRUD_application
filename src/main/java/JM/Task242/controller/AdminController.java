@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.management.relation.RoleResult;
 import java.util.List;
 
 @Controller
@@ -30,6 +32,7 @@ public class AdminController {
     @PostMapping(value = "/user/add")
     public String addUser(@ModelAttribute("user") User user) {
         if (user.getId() == null) {
+           // user.setRoles();
             userService.add(user);
         } else {
             userService.edit(user);

@@ -1,6 +1,7 @@
 package JM.Task242.config;
 
 
+import JM.Task242.security.SecurityConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -10,7 +11,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{JpaConfig.class};
+        return new Class[]{JpaConfig.class, SecurityConfig.class};
     }
 
     @Override

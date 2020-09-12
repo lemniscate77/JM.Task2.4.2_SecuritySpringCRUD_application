@@ -7,13 +7,12 @@
     <style>
         table {
             width: 20%;
-            background: white;
-            color: white;
+
             border-spacing: 1px;
         }
 
         td, th {
-            background: black;
+
             padding: 5px;
         }
     </style>
@@ -32,8 +31,8 @@
             <th th:text="${user.getId()}"></th>
         </tr>
         <tr>
-            <td>Name</td>
-            <th th:text="${user.getFirstName()}">Name</th>
+            <td>FirstName</td>
+            <th th:text="${user.getFirstName()}">FirstName</th>
         </tr>
         <tr>
             <td>LastName</td>
@@ -41,7 +40,7 @@
         </tr>
         <tr>
             <td>login</td>
-            <th th:text="${user.getEmail()}">Login</th>
+            <th th:text="${user.getEmail()}">Email</th>
         </tr>
         <tr>
             <td>Password</td>
