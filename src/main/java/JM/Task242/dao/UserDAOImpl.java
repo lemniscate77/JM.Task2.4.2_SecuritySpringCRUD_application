@@ -1,11 +1,15 @@
 package JM.Task242.dao;
 
+import JM.Task242.model.Role;
 import JM.Task242.model.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 // убрал коммент
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -21,6 +25,9 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void add(User user) {
+        Set<Role> roles = new HashSet<>();
+        roles.add(new Role(1,"ROLE_USER"));
+        user.setRoles(roles);
         em.persist(user);
     }
 

@@ -6,6 +6,9 @@
     <title>User</title>
 </head>
 <body>
+
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+
 <h2>Hello User!</h2>
 
 <h3>User INFO</h3>
